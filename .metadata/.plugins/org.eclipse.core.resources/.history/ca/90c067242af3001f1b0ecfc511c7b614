@@ -1,0 +1,175 @@
+package com.springmvc.controllers;
+
+import com.springmvc.beans.CartItem;
+import com.springmvc.beans.VDK_HOA_DON;
+import com.springmvc.beans.VDK_KHACH_HANG;
+import com.springmvc.beans.VDK_SAN_PHAM;
+import com.springmvc.beans.VDK_CT_HOA_DON;
+import com.springmvc.dao.SanPhamDao;
+import com.springmvc.dao.HoaDonDao;
+import com.springmvc.dao.KhachHangDao;
+import com.springmvc.dao.CTHoaDonDao;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
+@Controller
+public class HomeController {
+
+    @Autowired  
+    private SanPhamDao sanPhamDao;
+    
+    @Autowired  
+    private HoaDonDao hoaDonDao;
+    
+    @Autowired  
+    private KhachHangDao khachHangDao;
+    
+    @Autowired  
+    private CTHoaDonDao ctHoaDonDao;
+
+    // 🏠 Hiển thị danh sách sản phẩm
+    @GetMapping("/")
+    public String home(Model model) {
+        List<VDK_SAN_PHAM> sanPhams = sanPhamDao.getAll();
+        model.addAttribute("sanPhams", sanPhams);
+        return "index"; // Trả về view index.jsp hoặc index.html
+    }
+
+    // 🛒 Hiển thị giỏ hàng
+    @GetMapping("/giohang")
+    public String showCart(HttpSession session, Model model) {
+        List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
+        if (cartItems == null) {
+            cartItems = new ArrayList<>();
+        }
+        model.addAttribute("cartItems", cartItems);
+        model.addAttribute("totalAmount", calculateTotal(cartItems));
+        return "giohang"; 
+    }
+
+    // ➕ Thêm sản phẩm vào giỏ hàng
+    @GetMapping("/add-to-cart/{id}/{name}/{gia}")
+    public String addToCart(@PathVariable int id, @PathVariable String name, @PathVariable int gia, HttpSession session) {
+        List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
+        if (cartItems == null) {
+            cartItems = new ArrayList<>();
+        }
+        
+        boolean exists = false;
+        for (CartItem item : cartItems) {
+            if (item.getId() == id) {
+                item.setSoluong(item.getSoluong() + 1); // Nếu có, tăng số lượng
+                exists = true;
+                break;
+            }
+        }
+        
+        if (!exists) {
+            cartItems.add(new CartItem(id, name, gia, 1));
+        }
+        
+        session.setAttribute("cartItems", cartItems);
+        return "redirect:/giohang"; 
+    }
+
+    // ❌ Xóa sản phẩm khỏi giỏ hàng
+    @GetMapping("/xoagiohang/{id}")
+    public String deletegiohang(@PathVariable int id, HttpSession session) {
+        List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
+        if (cartItems != null) {
+            cartItems.removeIf(item -> item.getId() == id);
+            session.setAttribute("cartItems", cartItems);
+        }
+        return "redirect:/giohang"; 
+    }
+
+    // 🏷️ Tính tổng số tiền giỏ hàng
+    private int calculateTotal(List<CartItem> cartItems) {
+        int total = 0;
+        for (CartItem item : cartItems) {
+            total += item.getGia() * item.getSoluong();
+        }
+        return total;
+    }
+
+    // 💳 Thanh toán và lưu hóa đơn
+    @PostMapping("/checkout")
+    public String checkout(HttpSession session) {
+        List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
+        VDK_KHACH_HANG khachHang = (VDK_KHACH_HANG) session.getAttribute("user");
+
+        if (khachHang == null) {
+            return "redirect:/login";
+        }
+
+        float total = calculateTotal(cartItems);
+        VDK_HOA_DON hoaDon = new VDK_HOA_DON();
+        hoaDon.setVdk_maKhachHang(khachHang.getId());
+        hoaDon.setVdk_ngayHoaDon(new Date(System.currentTimeMillis()));
+        hoaDon.setVdk_tongTriGia(total);
+        hoaDon.setVdk_trangThai(1);
+
+        hoaDonDao.save(hoaDon);
+
+        for (CartItem item : cartItems) {
+            VDK_CT_HOA_DON ctHoaDon = new VDK_CT_HOA_DON();
+            ctHoaDon.setVdk_hoaDonID(hoaDon.getId());
+            ctHoaDon.setVdk_sanPhamID(item.getId());
+            ctHoaDon.setVdk_soLuongMua(item.getSoluong());
+            ctHoaDon.setVdk_donGiaMua(item.getGia());
+            ctHoaDon.setVdk_thanhTien(item.getGia() * item.getSoluong());
+            ctHoaDon.setVdk_trangThai(1);
+
+            ctHoaDonDao.save(ctHoaDon);
+        }
+
+        session.removeAttribute("cartItems");
+        return "redirect:/success";
+    }
+
+    // 📌 Hiển thị form đăng ký khách hàng
+    @GetMapping("/register")
+    public String registerForm(Model model) {
+        model.addAttribute("khachHang", new VDK_KHACH_HANG());
+        return "register";
+    }
+
+    // 📌 Lưu thông tin khách hàng
+    @PostMapping("/register")
+    public String register(@ModelAttribute("khachHang") VDK_KHACH_HANG khachHang) {
+        khachHangDao.save(khachHang);
+        return "redirect:/login";
+    }
+
+    // 🔑 Hiển thị form đăng nhập
+    @GetMapping("/login")
+    public String loginForm() {
+        return "login";
+    }
+
+    // 🔑 Xử lý đăng nhập
+    @PostMapping("/login")
+    public String login(@RequestParam("email") String email, @RequestParam("password") String password, HttpSession session) {
+        VDK_KHACH_HANG khachHang = khachHangDao.findByEmailAndPassword(email, password);
+        if (khachHang != null) {
+            session.setAttribute("user", khachHang);
+            return "redirect:/";
+        }
+        return "redirect:/login?error=true";
+    }
+
+    // 🚪 Đăng xuất
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("user");
+        return "redirect:/";
+    }
+}

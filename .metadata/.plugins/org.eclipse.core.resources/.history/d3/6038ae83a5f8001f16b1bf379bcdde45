@@ -1,0 +1,28 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8" %>
+<html>
+<head>
+    <title>Chỉnh sửa Admin</title>
+</head>
+<body>
+    <h2>Chỉnh sửa Admin</h2>
+    <form action="edit" method="post">
+        <input type="hidden" name="id" value="${admin.id}" />
+        
+        <label>Tài khoản:</label>
+        <input type="text" name="vdk_TaiKhoan" value="${admin.vdk_TaiKhoan}" required /><br>
+        
+        <label>Mật khẩu mới (để trống nếu không đổi):</label>
+        <input type="password" name="vdk_MatKhau" /><br>
+        
+        <label>Trạng thái:</label>
+        <select name="vdk_TrangThai">
+            <option value="true" ${admin.vdk_TrangThai ? 'selected' : ''}>Hoạt động</option>
+            <option value="false" ${!admin.vdk_TrangThai ? 'selected' : ''}>Bị khóa</option>
+        </select><br>
+        
+        <button type="submit">Cập nhật</button>
+    </form>
+    <a href="list">Quay lại danh sách</a>
+</body>
+</html>

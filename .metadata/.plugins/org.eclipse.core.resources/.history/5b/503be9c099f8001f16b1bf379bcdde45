@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<html>
+<head>
+    <title>Danh sách Admin</title>
+</head>
+<body>
+    <h2>Danh sách Admin</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Tài khoản</th>
+            <th>Hành động</th>
+        </tr>
+        <c:forEach var="admin" items="${admins}">
+            <tr>
+                <td>${admin.vdk_Id}</td>
+                <td>${admin.vdk_TaiKhoan}</td>
+                <td>
+                    <a href="edit/${admin.vdk_Id}">Sửa</a> |
+                    <a href="delete/${admin.vdk_Id}" onclick="return confirm('Xác nhận xóa?');">Xóa</a>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+    <a href="add">Thêm Admin</a>
+    <a href="logout">Đăng xuất</a>
+</body>
+</html>

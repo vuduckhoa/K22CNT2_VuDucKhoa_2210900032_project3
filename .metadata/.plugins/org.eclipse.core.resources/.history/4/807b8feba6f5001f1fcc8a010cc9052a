@@ -1,0 +1,128 @@
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sách Sản Phẩm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            width: 70%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background: #007bff;
+            color: white;
+        }
+
+        td img {
+            border-radius: 5px;
+            width: 100px;
+            height: 100px;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        a:hover {
+            opacity: 0.8;
+        }
+
+        a[href*='sua'] {
+            background: #ffc107;
+        }
+
+        a[href*='xoa'] {
+            background: #dc3545;
+        }
+
+        a[href*='add-to-cart'] {
+            background: #28a745;
+        }
+
+        a[href*='saveform'], a[href*='giohang'] {
+            background: #17a2b8;
+            margin: 10px;
+        }
+
+        input[type='button'] {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type='button']:hover {
+            background: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <h1>Danh Sách Sản Phẩm</h1>
+    <table border="2">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Ảnh</th>
+            <th>Giá</th>
+            <th>Số Lượng</th>
+            <th>Mua</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <c:forEach var="product" items="${list}">
+            <tr>
+                <td>${product.id}</td>
+                <td>${product.vdk_name}</td>
+                <td><img src="${product.vdk_hinhanh}" alt="Hình ảnh sản phẩm"/></td>
+                <td>${product.vdk_gia}</td>
+                <td>${product.vdk_soluong}</td>
+                <td>
+                    <a href="<c:url value='/add-to-cart'>
+                        <c:param name='id' value='${product.id}'/>
+                        <c:param name='vdk_name' value='${product.vdk_name}'/>
+                        <c:param name='vdk_hinhanh' value='${product.vdk_hinhanh}'/>
+                        <c:param name='vdk_gia' value='${product.vdk_gia}'/>
+                    </c:url>">
+                        Mua
+                    </a>
+                </td>
+                <td><a href="sua/${product.id}">Edit</a></td>
+                <td><a href="xoa/${product.id}">Delete</a></td>
+            </tr>
+        </c:forEach>
+    </table>
+    <br/>
+    <a href="saveform">Thêm Sản Phẩm</a>
+    <a href="giohang">Mua</a>
+    <br/>
+    <input type="button" value="Back" onclick="window.history.back();" />
+</body>
+</html>

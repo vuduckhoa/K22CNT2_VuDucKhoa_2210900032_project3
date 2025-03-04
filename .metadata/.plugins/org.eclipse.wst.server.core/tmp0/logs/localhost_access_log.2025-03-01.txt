@@ -1,0 +1,15 @@
+127.0.0.1 - - [01/Mar/2025:08:46:22 +0700] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [01/Mar/2025:08:46:23 +0700] "GET /SpringMVCPagination/ HTTP/1.1" 200 2952
+0:0:0:0:0:0:0:1 - - [01/Mar/2025:08:46:23 +0700] "GET /SpringMVCPagination/styles.css HTTP/1.1" 404 604
+0:0:0:0:0:0:0:1 - - [01/Mar/2025:08:46:23 +0700] "GET /favicon.ico HTTP/1.1" 404 684
+0:0:0:0:0:0:0:1 - - [01/Mar/2025:08:46:48 +0700] "GET /SpringMVCPagination/viewform HTTP/1.1" 200 7177
+0:0:0:0:0:0:0:1 - - [01/Mar/2025:08:46:57 +0700] "GET /SpringMVCPagination/saveform HTTP/1.1" 200 3045
+0:0:0:0:0:0:0:1 - - [01/Mar/2025:08:47:00 +0700] "GET /SpringMVCPagination/giohang HTTP/1.1" 200 2592
+0:0:0:0:0:0:0:1 - - [01/Mar/2025:08:47:02 +0700] "GET /SpringMVCPagination/viewform HTTP/1.1" 200 7177
+0:0:0:0:0:0:0:1 - - [01/Mar/2025:08:47:03 +0700] "GET /SpringMVCPagination/add-to-cart?id=12&vdk_name=khoa&vdk_hinhanh=https%3a%2f%2fmedia.istockphoto.com%2fid%2f1283087255%2fvi%2fvec-to%2fbi%25E1%25BB%2583u-t%25C6%25B0%25E1%25BB%25A3ng-hammer-tr%25C3%25AAn-n%25E1%25BB%2581n-trong-su%25E1%25BB%2591t.jpg%3fs%3d612x612%26w%3d0%26k%3d20%26c%3du_WIhvBqKKMFeic9O4lwSQ4UWt9V3ris63azza-gQEs%3d&vdk_gia=2 HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [01/Mar/2025:08:47:03 +0700] "GET /SpringMVCPagination/giohang HTTP/1.1" 200 3739
+0:0:0:0:0:0:0:1 - - [01/Mar/2025:08:47:05 +0700] "GET /SpringMVCPagination/viewform HTTP/1.1" 200 7177
+0:0:0:0:0:0:0:1 - - [01/Mar/2025:08:47:08 +0700] "GET /SpringMVCPagination/giohang HTTP/1.1" 200 3739
+0:0:0:0:0:0:0:1 - - [01/Mar/2025:08:47:11 +0700] "GET /SpringMVCPagination/viewform HTTP/1.1" 200 7177
+0:0:0:0:0:0:0:1 - - [01/Mar/2025:08:47:12 +0700] "GET /SpringMVCPagination/add-to-cart?id=12&vdk_name=khoa&vdk_hinhanh=https%3a%2f%2fmedia.istockphoto.com%2fid%2f1283087255%2fvi%2fvec-to%2fbi%25E1%25BB%2583u-t%25C6%25B0%25E1%25BB%25A3ng-hammer-tr%25C3%25AAn-n%25E1%25BB%2581n-trong-su%25E1%25BB%2591t.jpg%3fs%3d612x612%26w%3d0%26k%3d20%26c%3du_WIhvBqKKMFeic9O4lwSQ4UWt9V3ris63azza-gQEs%3d&vdk_gia=2 HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [01/Mar/2025:08:47:12 +0700] "GET /SpringMVCPagination/giohang HTTP/1.1" 200 3739

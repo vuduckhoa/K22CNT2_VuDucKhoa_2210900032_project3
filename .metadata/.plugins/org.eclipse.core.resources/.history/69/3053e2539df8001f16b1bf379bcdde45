@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chỉnh Sửa Thiết Bị</title>
+</head>
+<body>
+    <h2>Chỉnh Sửa Thiết Bị</h2>
+    <form action="../update" method="post">
+        <input type="hidden" name="id" value="${command.id}">
+
+        <label>Tên Thiết Bị:</label>
+        <input type="text" name="vdk_name" value="${command.vdk_name}" required><br>
+
+        <label>Số Lượng:</label>
+        <input type="number" name="vdk_soluong" value="${command.vdk_soluong}" required><br>
+
+        <label>Hình Ảnh URL:</label>
+        <input type="text" name="vdk_hinhanh" value="${command.vdk_hinhanh}"><br>
+
+        <label>Trạng Thái:</label>
+        <select name="vdk_trangthai">
+            <option value="true" ${command.vdk_trangthai ? 'selected' : ''}>Hoạt động</option>
+            <option value="false" ${!command.vdk_trangthai ? 'selected' : ''}>Không hoạt động</option>
+        </select><br>
+
+        <input type="submit" value="Cập Nhật">
+    </form>
+    <a href="../list">Quay lại</a>
+</body>
+</html>

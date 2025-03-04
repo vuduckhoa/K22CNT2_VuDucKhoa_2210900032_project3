@@ -1,0 +1,92 @@
+package com.springmvc.controllers;
+
+import com.springmvc.beans.Vdk_quantri;
+import com.springmvc.dao.VDK_quantridao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
+@Controller
+@RequestMapping("/")
+public class AdminController {
+
+    @Autowired
+    private VDK_quantridao quantriDao;
+
+    @GetMapping("/list")
+    public String listAdmins(Model model) {
+        List<Vdk_quantri> admins = quantriDao.getEmployees();
+        model.addAttribute("admins", admins);
+        return "redirect:/list";
+    }
+
+    @GetMapping("/register")
+    public String showRegisterForm(Model model) {
+        model.addAttribute("admin", new Vdk_quantri());
+        return "/register";
+    }
+
+    @PostMapping("/register")
+    public String registerAdmin(@ModelAttribute("admin") Vdk_quantri admin) {
+        quantriDao.save(admin);
+        return "redirect:/login";
+    }
+
+    @GetMapping("/login")
+    public String showLoginForm(Model model) {
+        model.addAttribute("admin", new Vdk_quantri());
+        return "admin/login";
+    }
+
+    @PostMapping("/login")
+    public String loginAdmin(@ModelAttribute("admin") Vdk_quantri admin, HttpSession session) {
+        List<Vdk_quantri> admins = quantriDao.getEmployees();
+        for (Vdk_quantri a : admins) {
+            if (a.getVdk_TaiKhoan().equals(admin.getVdk_TaiKhoan()) && a.getVdk_MatKhau().equals(admin.getVdk_MatKhau())) {
+                session.setAttribute("loggedInAdmin", a);
+                return "redirect:/list";
+            }
+        }
+        return "redirect:/admin/login?error";
+    }
+
+    @GetMapping("/logout")
+    public String logoutAdmin(HttpSession session) {
+        session.invalidate();
+        return "redirect:/login";
+    }
+
+    @GetMapping("/add")
+    public String showAddForm(Model model) {
+        model.addAttribute("admin", new Vdk_quantri());
+        return "add";
+    }
+
+    @PostMapping("/save")
+    public String saveAdmin(@ModelAttribute("admin") Vdk_quantri admin) {
+        quantriDao.save(admin);
+        return "redirect:/list";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable int id, Model model) {
+        Vdk_quantri admin = quantriDao.getEmpById(id);
+        model.addAttribute("admin", admin);
+        return "/edit";
+    }
+
+    @PostMapping("/update")
+    public String updateAdmin(@ModelAttribute("admin") Vdk_quantri admin) {
+        quantriDao.update(admin);
+        return "redirect:/list";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteAdmin(@PathVariable int id) {
+        quantriDao.delete(id);
+        return "redirect:/list";
+    }
+}

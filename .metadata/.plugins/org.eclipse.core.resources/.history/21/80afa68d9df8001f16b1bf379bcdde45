@@ -1,0 +1,82 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thêm Thiết Bị</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            text-align: left;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2>Thêm Thiết Bị</h2>
+    <form action="save" method="post">
+        <label>Tên Thiết Bị:</label>
+        <input type="text" name="vdk_name" required>
+
+        <label>Số Lượng:</label>
+        <input type="number" name="vdk_soluong" required>
+
+        <label>Hình Ảnh URL:</label>
+        <input type="text" name="vdk_hinhanh">
+
+        <label>Trạng Thái:</label>
+        <select name="vdk_trangthai">
+            <option value="true">Hoạt động</option>
+            <option value="false">Không hoạt động</option>
+        </select>
+
+        <input type="submit" value="Lưu">
+    </form>
+    <br>
+    <a href="list">Quay lại</a>
+</body>
+</html>

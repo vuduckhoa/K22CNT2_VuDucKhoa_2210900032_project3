@@ -1,0 +1,45 @@
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Danh Sách Sản Phẩm</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Danh Sách Sản Phẩm</h1>
+        <div class="product-list">
+            <c:forEach var="product" items="${list}">
+                <div class="product-item">
+                    <h2>${product.vdk_name}</h2>
+                    <img src="${product.vdk_hinhanh}" alt="Hình ảnh sản phẩm"/>
+                    <p>Giá: ${product.vdk_gia}</p>
+                    <p>Số Lượng: ${product.vdk_soluong}</p>
+                    <a href="<c:url value='/add-to-cart'>
+                        <c:param name='id' value='${product.id}'/>
+                        <c:param name='vdk_name' value='${product.vdk_name}'/>
+                        <c:param name='vdk_hinhanh' value='${product.vdk_hinhanh}'/>
+                        <c:param name='vdk_gia' value='${product.vdk_gia}'/>
+                    </c:url>" class="buy-btn">
+                        Mua
+                    </a>
+                    <a href="sua/${product.id}" class="edit-btn">Edit</a>
+                    <a href="xoa/${product.id}" class="delete-btn">Delete</a>
+                </div>
+            </c:forEach>
+        </div>
+        <div class="action-buttons">
+            <a href="saveform">Thêm Sản Phẩm</a>
+            <a href="giohang">Giỏ Hàng</a>
+        </div>
+        <br/>
+        <input type="button" value="Back" onclick="window.history.back();" />
+    </div>
+    <div class="footer">
+        &copy; 2025 Web quản lý xưởng mộc Hoàng Hoan - Vũ Đức Khoa
+    </div>
+</body>
+</html>

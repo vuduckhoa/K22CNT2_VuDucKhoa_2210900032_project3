@@ -1,0 +1,17 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<html>
+<head>
+    <title>Chỉnh sửa quản trị viên</title>
+</head>
+<body>
+    <h2>Chỉnh sửa thông tin quản trị viên</h2>
+    <form action="../update" method="post">
+        <input type="hidden" name="id" value="${admin.id}" />
+        Tài khoản: <input type="text" name="vdk_TaiKhoan" value="${admin.vdk_TaiKhoan}" required /><br/>
+        Mật khẩu: <input type="password" name="vdk_MatKhau" value="${admin.vdk_MatKhau}" required /><br/>
+        Trạng thái: <input type="checkbox" name="vdk_TrangThai" value="true" ${admin.vdk_TrangThai ? 'checked' : ''} /><br/>
+        <button type="submit">Cập nhật</button>
+    </form>
+    <a href="../list">Quay lại danh sách</a>
+</body>
+</html>

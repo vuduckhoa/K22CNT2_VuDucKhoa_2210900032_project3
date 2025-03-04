@@ -1,0 +1,16 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<html>
+<head>
+    <title>Thêm quản trị viên</title>
+</head>
+<body>
+    <h2>Thêm quản trị viên</h2>
+    <form action="save" method="post">
+        Tài khoản: <input type="text" name="vdk_TaiKhoan" required /><br/>
+        Mật khẩu: <input type="password" name="vdk_MatKhau" required /><br/>
+        Trạng thái: <input type="checkbox" name="vdk_TrangThai" value="true" /><br/>
+        <button type="submit">Thêm</button>
+    </form>
+    <a href="list">Quay lại danh sách</a>
+</body>
+</html>

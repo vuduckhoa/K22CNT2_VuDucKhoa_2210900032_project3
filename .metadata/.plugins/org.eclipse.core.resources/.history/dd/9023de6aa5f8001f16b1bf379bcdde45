@@ -1,0 +1,84 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page pageEncoding="UTF-8" %>
+<html>
+<head>
+    <title>Đăng nhập Admin</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 350px;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-weight: bold;
+            text-align: left;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px 15px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #0056b3, #004090);
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Đăng nhập</h2>
+        <form action="login" method="post">
+            <label for="taiKhoan">Tài khoản:</label>
+            <input type="text" id="taiKhoan" name="vdk_TaiKhoan" required />
+            
+            <label for="matKhau">Mật khẩu:</label>
+            <input type="password" id="matKhau" name="vdk_MatKhau" required />
+            
+            <button type="submit">Đăng nhập</button>
+        </form>
+        
+        <c:if test="${not empty error}">
+            <p class="error-message">${error}</p>
+        </c:if>
+    </div>
+</body>
+</html>
