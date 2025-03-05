@@ -135,9 +135,11 @@
         <div class="action-buttons">
             <a href="saveform">Thêm Sản Phẩm</a>
             <a href="giohang">Giỏ Hàng</a>
+             <a href="<c:url value='/' />">Về Trang Chủ</a>
         </div>
         <br/>
         <input type="button" value="Back" onclick="window.history.back();" />
+        
     </div>
     <div class="footer">
         &copy; 2025 Web quản lý xưởng mộc Hoàng Hoan - Vũ Đức Khoa

@@ -5,4 +5,6 @@
     <fullyQualifiedTypeName name="com.springmvc.dao.Vdk_sanphamdao"/>
     <fullyQualifiedTypeName name="com.springmvc.dao.VDK_quantridao"/>
     <fullyQualifiedTypeName name="com.springmvc.beans.Vdk_quantri"/>
+    <fullyQualifiedTypeName name="com.springmvc.beans.Vdk_khachhang"/>
+    <fullyQualifiedTypeName name="com.springmvc.beans.BAV_NhanVien"/>
 </qualifiedTypeNameHistroy>

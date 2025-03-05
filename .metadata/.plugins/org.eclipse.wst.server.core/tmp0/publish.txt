@@ -1,4 +1,2 @@
 #Tomcat publish data
-#Tue Mar 04 10:05:41 ICT 2025
-org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\DELL\\.m2\\repository\\org\\apache\\tomcat\\tomcat-jasper\\9.0.12\\tomcat-jasper-9.0.12.jar=WEB-INF/lib/tomcat-jasper-9.0.12.jar
-org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\DELL\\.m2\\repository\\org\\springframework\\spring-web\\5.1.1.RELEASE\\spring-web-5.1.1.RELEASE.jar=WEB-INF/lib/spring-web-5.1.1.RELEASE.jar
+#Wed Mar 05 15:59:47 ICT 2025

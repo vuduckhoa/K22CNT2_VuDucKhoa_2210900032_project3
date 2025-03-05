@@ -59,11 +59,6 @@
 			<version>5.1.1.RELEASE</version>
 		</dependency>
 
-		<dependency>
-			<groupId>VUDUCKHOA_2210900032</groupId>
-			<artifactId>VUDUCKHOA_2210900032</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

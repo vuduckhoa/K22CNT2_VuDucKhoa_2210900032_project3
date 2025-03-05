@@ -25,11 +25,7 @@ CREATE TABLE vdk_khachhang(
      vdk_name VARCHAR(25) UNIQUE, 
      vdk_sdt VARCHAR(255), 
      vdk_email VARCHAR(255), 
-     vdk_diachi VARCHAR(255), 
-     vdk_sanpham VARCHAR(255),
-     vdk_soluong INTEGER NOT NULL,
-     vdk_gia INT
-     
+     vdk_diachi VARCHAR(255)
 );
 CREATE TABLE vdk_thietbi (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -38,4 +34,6 @@ CREATE TABLE vdk_thietbi (
     vdk_hinhanh VARCHAR(255), 
     vdk_trangthai TINYINT
 );
-drop table vdk_thietbi
+
+
+

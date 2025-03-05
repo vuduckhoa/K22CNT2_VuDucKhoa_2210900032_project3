@@ -18,7 +18,9 @@
     <!-- Cấu hình kết nối MySQL -->
     <bean id="db" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-        <property name="url" value="jdbc:mysql://localhost:3306/K22CNT2_VuDucKhoa_2210900032_pj3"></property>
+  <property name="url" value="jdbc:mysql://localhost:3306/K22CNT2_VuDucKhoa_2210900032_pj3?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC"></property>
+
+
         <property name="username" value="root"></property>
         <property name="password" value="vuduckhoa2004"></property>
     </bean>
@@ -41,5 +43,4 @@
     <bean id="quantridao" class="com.springmvc.dao.VDK_quantridao">
         <property name="template" ref="jt"></property>
     </bean>
-
 </beans>

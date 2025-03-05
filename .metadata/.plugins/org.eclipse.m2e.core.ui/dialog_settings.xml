@@ -2,12 +2,14 @@
 <section name="Workbench">
 	<section name="wizardPage">
 		<list key="groupId">
+			<item value="K22CNT2_BuiAnhVuong_2210900084_PROJECT3"/>
 			<item value="K22CNT2_VuDucKhoa_2210900032_PRJ3"/>
 			<item value="K22CNT2_VUDUCKHOA_2210900032_PROJECT3"/>
 		</list>
 		<list key="name">
 		</list>
 		<list key="artifactId">
+			<item value="K22CNT2_BuiAnhVuong_2210900084_PROJECT3"/>
 			<item value="K22CNT2_VuDucKhoa_2210900032_PRJ3"/>
 			<item value="K22CNT2_VUDUCKHOA_2210900032_PROJECT3"/>
 		</list>
