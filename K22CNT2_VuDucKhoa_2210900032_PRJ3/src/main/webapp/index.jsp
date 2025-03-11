@@ -132,7 +132,7 @@ body {
 			<li><a href="viewform">Sản Phẩm</a></li>
 			<li><a href="thietbi/list">Thiết Bị</a></li>
 			<li><a href="giohang">Giỏ Hàng</a></li>
-			<li><a href="#">Hóa Đơn</a></li>
+			<li><a href="khachhang/list">Khách Hàng</a></li>
 			<li><a href="admin/list">Quản Trị</a></li>
 
 			<li><a href="admin/login">Đăng Nhập</a></li>

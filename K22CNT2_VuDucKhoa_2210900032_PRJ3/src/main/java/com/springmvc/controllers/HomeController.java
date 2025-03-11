@@ -15,13 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.springmvc.beans.Vdk_giohang;
+import com.springmvc.beans.Vdk_khachhang;
 import com.springmvc.beans.Vdk_sanpham;
+import com.springmvc.dao.Vdk_KhachHangDao;
 import com.springmvc.dao.Vdk_sanphamdao;
 import javax.servlet.http.HttpSession;
 
 @Controller  
 public class HomeController {  
-
+	
     @Autowired  
     Vdk_sanphamdao dao; // Inject UserDao for data operations
     // Giỏ hàng tạm thời lưu trong bộ nhớ (nên chuyển vào session trong môi trường thực tế)
@@ -42,6 +44,7 @@ public class HomeController {
         model.addAttribute("totalAmount", calculateTotal(cartItems));
         return "giohang";
     }
+  
 
     
     @GetMapping("/add-to-cart")

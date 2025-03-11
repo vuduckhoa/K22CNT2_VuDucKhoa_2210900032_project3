@@ -34,6 +34,13 @@ CREATE TABLE vdk_thietbi (
     vdk_hinhanh VARCHAR(255), 
     vdk_trangthai TINYINT
 );
+CREATE TABLE vdk_hoadon (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    vdk_khachhang VARCHAR(100),
+    vdk_tongtien INT,
+    vdk_phuongthucthanhtoan VARCHAR(255), 
+    vdk_ngaytao DATETIME 
+);
 
 
 

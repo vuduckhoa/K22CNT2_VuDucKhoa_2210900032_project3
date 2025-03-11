@@ -128,7 +128,10 @@
                 </tbody>
             </table>
             <h3>Tổng cộng: ${totalAmount} VND</h3>
-            <button class="checkout-btn">Thanh toán</button>
+         <form action="<c:url value='/thanhtoan' />" method="post">
+
+    <button type="submit" class="checkout-btn">Thanh toán</button>
+</form>
         </c:if>
         <c:if test="${empty cartItems}">
             <p class="empty-message">Giỏ hàng của bạn hiện tại trống.</p>

@@ -128,12 +128,17 @@
                 </tbody>
             </table>
             <h3>Tổng cộng: ${totalAmount} VND</h3>
-            <button class="checkout-btn">Thanh toán</button>
+         <form action="<c:url value='/thanhtoan' />" method="post">
+
+    <button type="submit" class="checkout-btn">Thanh toán</button>
+</form>
         </c:if>
         <c:if test="${empty cartItems}">
             <p class="empty-message">Giỏ hàng của bạn hiện tại trống.</p>
         </c:if>
+        
         <a href="viewform" class="back-btn">Tiếp tục mua sắm</a>
+        <a href="<c:url value='/' />">Về Trang Chủ</a> <!-- Điều hướng về index -->
     </div>
 </body>
 </html>
