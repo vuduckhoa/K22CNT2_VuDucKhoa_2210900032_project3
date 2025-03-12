@@ -128,10 +128,16 @@
                 </tbody>
             </table>
             <h3>Tổng cộng: ${totalAmount} VND</h3>
-         <form action="<c:url value='/thanhtoan' />" method="post">
-
+        <form action="<c:url value='/xulythanhtoan' />" method="post">
+    <label>Chọn phương thức thanh toán:</label>
+    <select name="paymentMethod">
+        <option value="NganHang">Ngân Hàng MB</option>
+        <option value="NganHang">MoMo</option>
+       
+    </select>
     <button type="submit" class="checkout-btn">Thanh toán</button>
 </form>
+
         </c:if>
         <c:if test="${empty cartItems}">
             <p class="empty-message">Giỏ hàng của bạn hiện tại trống.</p>
