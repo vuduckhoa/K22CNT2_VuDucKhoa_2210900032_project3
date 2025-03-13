@@ -1,17 +1,26 @@
 package com.springmvc.controllers;
 
 import java.net.URLEncoder;
-
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.springmvc.beans.Vdk_giohang;
 import com.springmvc.beans.Vdk_sanpham;
 import com.springmvc.dao.Vdk_sanphamdao;
+
+
+
 
 @Controller  
 public class HomeController {  
@@ -126,7 +135,11 @@ public class HomeController {
   
 
     @PostMapping("/xulythanhtoan")
-    public String xuLyThanhToan(@RequestParam String paymentMethod, HttpSession session, Model model) {
+    public String xuLyThanhToan(@RequestParam String customerName,
+                                @RequestParam String customerPhone,
+                                @RequestParam String customerAddress,
+                                @RequestParam String paymentMethod,
+                                HttpSession session, Model model) {
         List<Vdk_giohang> cartItems = (List<Vdk_giohang>) session.getAttribute("cartItems");
         if (cartItems == null || cartItems.isEmpty()) {
             return "redirect:/giohang";
@@ -143,7 +156,7 @@ public class HomeController {
                 try {
                     String bankCode = "MB";
                     String accountNumber = "270820004";
-                    String paymentInfo = URLEncoder.encode("khoadeptrai", "UTF-8");
+                    String paymentInfo = URLEncoder.encode("Thanh toán: " + customerName, "UTF-8");
 
                     paymentUrl = "https://img.vietqr.io/image/" + bankCode + "-" + accountNumber + 
                                  "-compact.png?amount=" + totalAmount + "&addInfo=" + paymentInfo + "&currency=VND";
@@ -153,27 +166,57 @@ public class HomeController {
                 break;
         }
 
+        // ✅ Lưu thông tin vào session
+        session.setAttribute("customerName", customerName);
+        session.setAttribute("customerPhone", customerPhone);
+        session.setAttribute("customerAddress", customerAddress);
+        session.setAttribute("paymentMethod", paymentMethod);
+        session.setAttribute("totalAmount", totalAmount);
+        session.setAttribute("paymentUrl", paymentUrl);
+
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("totalAmount", totalAmount);
         model.addAttribute("paymentMethod", paymentMethod);
         model.addAttribute("paymentUrl", paymentUrl);
+        model.addAttribute("customerName", customerName);
+        model.addAttribute("customerPhone", customerPhone);
+        model.addAttribute("customerAddress", customerAddress);
 
         return "xulythanhtoan";
     }
+
+
     @PostMapping("/thanhtoan-thanhcong")
     public String thanhToanThanhCong(HttpSession session, Model model) {
-        // Lấy giỏ hàng từ session
         List<Vdk_giohang> cartItems = (List<Vdk_giohang>) session.getAttribute("cartItems");
 
         if (cartItems == null || cartItems.isEmpty()) {
             return "redirect:/giohang"; // Nếu giỏ hàng trống, quay lại giỏ hàng
         }
 
-        // Xóa giỏ hàng sau khi thanh toán thành công
+        // ✅ Lấy thông tin từ session
+        String customerName = (String) session.getAttribute("customerName");
+        String customerPhone = (String) session.getAttribute("customerPhone");
+        String customerAddress = (String) session.getAttribute("customerAddress");
+        String paymentMethod = (String) session.getAttribute("paymentMethod");
+        int totalAmount = (int) session.getAttribute("totalAmount");
+
+        // ❌ Không xóa giỏ hàng trước khi truyền dữ liệu
+        // ✅ Lưu giỏ hàng vào model
+        model.addAttribute("cartItems", cartItems);
+
+        // Đưa thông tin ra giao diện
+        model.addAttribute("message", "Thanh toán thành công!");
+        model.addAttribute("customerName", customerName);
+        model.addAttribute("customerPhone", customerPhone);
+        model.addAttribute("customerAddress", customerAddress);
+        model.addAttribute("totalAmount", totalAmount);
+        model.addAttribute("paymentMethod", paymentMethod);
+
+        // Sau khi gán vào model mới xóa session
         session.removeAttribute("cartItems");
 
-        // Chuyển hướng đến trang xác nhận thanh toán
-        model.addAttribute("message", "Thanh toán thành công!");
         return "xacnhanthanhtoan"; // Trả về trang xác nhận thanh toán
     }
+
 }

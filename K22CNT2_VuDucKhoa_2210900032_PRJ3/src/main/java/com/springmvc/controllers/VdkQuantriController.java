@@ -24,20 +24,26 @@ public class VdkQuantriController {
         return "admin/login";  // Trả về trang login.jsp
     }
 
-    // Xử lý đăng nhập
+ // Xử lý đăng nhập
     @PostMapping("/login")
     public String login(@RequestParam("username") String username,
                         @RequestParam("password") String password,
                         HttpSession session, Model model) {
         Vdk_quantri admin = dao.getAdminByUsernameAndPassword(username, password);
         if (admin != null) {
-            session.setAttribute("admin", admin);  // Lưu thông tin admin vào session
-            return "redirect:/admin/list";
+            if (admin.isVdk_TrangThai()) { // Kiểm tra trạng thái của tài khoản
+                session.setAttribute("admin", admin);  // Lưu thông tin admin vào session
+                return "redirect:/admin/list"; // Đăng nhập thành công
+            } else {
+                model.addAttribute("error", "Tài khoản của bạn đã bị khóa!");
+                return "admin/login"; // Tài khoản bị khóa
+            }
         } else {
             model.addAttribute("error", "Sai tài khoản hoặc mật khẩu!");
-            return "admin/login";
+            return "admin/login"; // Sai tài khoản hoặc mật khẩu
         }
     }
+
 
     // Đăng xuất
     @GetMapping("/logout")

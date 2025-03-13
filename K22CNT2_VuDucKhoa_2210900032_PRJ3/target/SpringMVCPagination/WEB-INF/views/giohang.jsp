@@ -128,10 +128,26 @@
                 </tbody>
             </table>
             <h3>Tổng cộng: ${totalAmount} VND</h3>
-         <form action="<c:url value='/thanhtoan' />" method="post">
+        <form action="<c:url value='/xulythanhtoan' />" method="post">
+    <label>Họ và Tên:</label>
+    <input type="text" name="customerName" required><br>
+
+    <label>Số Điện Thoại:</label>
+    <input type="text" name="customerPhone" required><br>
+
+    <label>Địa Chỉ:</label>
+    <input type="text" name="customerAddress" required><br>
+
+    <label>Chọn phương thức thanh toán:</label>
+    <select name="paymentMethod">
+        <option value="NganHang">Ngân Hàng MB</option>
+        <option value="MoMo">MoMo</option>
+    </select><br>
 
     <button type="submit" class="checkout-btn">Thanh toán</button>
 </form>
+
+
         </c:if>
         <c:if test="${empty cartItems}">
             <p class="empty-message">Giỏ hàng của bạn hiện tại trống.</p>
