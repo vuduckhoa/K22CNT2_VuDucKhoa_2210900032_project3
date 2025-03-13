@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy 3 elements to &apos;WEB-INF&apos;&#x0D;&#x0A;- Original project: &apos;VUDUCKHOA_2210900032_K22CNT3_de2&apos;&#x0D;&#x0A;- Destination element: &apos;WEB-INF&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     spring-servlet.xml&#x0D;&#x0A;     web.xml&#x0D;&#x0A;     views" description="Copy elements" element1="src/main/webapp/WEB-INF/spring-servlet.xml" element2="src/main/webapp/WEB-INF/web.xml" element3="src/main/webapp/WEB-INF/views" files="2" flags="589830" folders="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1740464509447" target="/K22CNT2_VuDucKhoa_2210900032_PRJ3/src/main/webapp/WEB-INF" units="0" version="1.0"/>
-</session>
